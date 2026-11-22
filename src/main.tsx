@@ -1,3 +1,5 @@
+import '@fontsource-variable/kantumruy-pro'
+import '@fontsource-variable/noto-sans-sc'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 

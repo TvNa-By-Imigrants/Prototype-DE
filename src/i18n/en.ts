@@ -1,10 +1,10 @@
 export const en = {
   nav: {
     home: "Home",
-    feed: "Feed",
+    place: "Place",
     plan: "Plan",
     map: "Map",
-    hub: "Hub",
+    feed: "Feed",
   },
   header: {
     homeAria: "TvNa home",
@@ -21,9 +21,22 @@ export const en = {
     open24Hours: "24 hours",
     goNow: "Go Now",
     addToPlan: "Add to Plan",
+    likes: "Likes",
+    comments: "Comments",
+    views: "Views",
+    verified: "Verified",
+  },
+  category: {
+    visit: "Visit",
+    stay: "Stay",
+    eat: "Eat",
   },
   discovery: {
-    featuredTitle: "Featured places",
+    heroHeadline: "Where to go?",
+    heroTagline: "Discover places to visit, eat and stay in Phnom Penh",
+    feedTitle: "Feed",
+    feedSubtitle: "Fresh picks from the community",
+    placesTitle: "Places to hang out",
     viewAll: "View All",
   },
 } as const

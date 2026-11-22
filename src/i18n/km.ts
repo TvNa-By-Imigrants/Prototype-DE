@@ -3,10 +3,10 @@ import type { TranslationDictionary } from "./en"
 export const km: TranslationDictionary = {
   nav: {
     home: "ទំព័រដើម",
-    feed: "ព័ត៌មាន",
+    place: "កន្លែង",
     plan: "ផែនការ",
     map: "ផែនទី",
-    hub: "គណនី",
+    feed: "ហ្វីត",
   },
   header: {
     homeAria: "ទំព័រដើម TvNa",
@@ -23,9 +23,22 @@ export const km: TranslationDictionary = {
     open24Hours: "២៤ ម៉ោង",
     goNow: "ទៅឥឡូវ",
     addToPlan: "ដាក់ចូលផែនការ",
+    likes: "ចូលចិត្ត",
+    comments: "មតិ",
+    views: "ចំនួនមើល",
+    verified: "បានផ្ទៀងផ្ទាត់",
+  },
+  category: {
+    visit: "កន្លែងដើរលេង",
+    stay: "កន្លែងស្នាក់នៅ",
+    eat: "កន្លែងញ៉ាំ",
   },
   discovery: {
-    featuredTitle: "កន្លែងពេញនិយម",
+    heroHeadline: "ទៅណា?",
+    heroTagline: "រកមើលកន្លែងដើរលេង ញ៉ាំ និងស្នាក់នៅក្នុងភ្នំពេញ",
+    feedTitle: "ហ្វីត",
+    feedSubtitle: "ការជ្រើសរើសថ្មីៗពីសហគមន៍",
+    placesTitle: "កន្លែងដើរលេង",
     viewAll: "មើលទាំងអស់",
   },
 }

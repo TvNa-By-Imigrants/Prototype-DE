@@ -1,8 +1,8 @@
 import {
   CalendarDaysIcon,
-  CircleUserRoundIcon,
   HouseIcon,
   MapIcon,
+  MapPinIcon,
   RssIcon,
   type LucideIcon,
 } from "lucide-react"
@@ -17,15 +17,14 @@ export type NavItem = {
 }
 
 /**
- * The five primary destinations — one per epic (Discovery, Community, Plan,
- * Map, Auth/Profile).
+ * The five primary destinations: Home, Place, Plan, Map, Feed.
  */
 export const navItems: NavItem[] = [
   { labelKey: "nav.home", href: "/", icon: HouseIcon },
-  { labelKey: "nav.feed", href: "/feed", icon: RssIcon },
+  { labelKey: "nav.place", href: "/place", icon: MapPinIcon },
   { labelKey: "nav.plan", href: "/plan", icon: CalendarDaysIcon },
   { labelKey: "nav.map", href: "/map", icon: MapIcon },
-  { labelKey: "nav.hub", href: "/hub", icon: CircleUserRoundIcon },
+  { labelKey: "nav.feed", href: "/feed", icon: RssIcon },
 ]
 
 export type NavProps = {
