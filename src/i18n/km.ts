@@ -19,4 +19,13 @@ export const km: TranslationDictionary = {
     changeLanguage: "ប្តូរភាសា",
     toggleTheme: "ប្តូរផ្ទៃពណ៌",
   },
+  card: {
+    open24Hours: "២៤ ម៉ោង",
+    goNow: "ទៅឥឡូវ",
+    addToPlan: "ដាក់ចូលផែនការ",
+  },
+  discovery: {
+    featuredTitle: "កន្លែងពេញនិយម",
+    viewAll: "មើលទាំងអស់",
+  },
 }

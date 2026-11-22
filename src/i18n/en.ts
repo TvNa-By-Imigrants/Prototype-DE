@@ -17,6 +17,15 @@ export const en = {
     changeLanguage: "Change language",
     toggleTheme: "Toggle theme",
   },
+  card: {
+    open24Hours: "24 hours",
+    goNow: "Go Now",
+    addToPlan: "Add to Plan",
+  },
+  discovery: {
+    featuredTitle: "Featured places",
+    viewAll: "View All",
+  },
 } as const
 
 type Widen<T> = {
