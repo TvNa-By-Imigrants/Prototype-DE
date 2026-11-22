@@ -66,6 +66,14 @@ export function PlaceCard({ place, className }: PlaceCardProps) {
 
       <CardContent className="flex flex-wrap items-center gap-1.5">
         <Badge variant="secondary">{place.category}</Badge>
+        {place.isPartnered ? (
+          <Badge
+            variant="outline"
+            className="border-primary/40 bg-primary/10 text-primary font-medium"
+          >
+            {t("card.partnered")}
+          </Badge>
+        ) : null}
         {show24Hours ? (
           <Badge
             variant="outline"

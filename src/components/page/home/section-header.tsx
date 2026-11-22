@@ -9,9 +9,16 @@ export type SectionHeaderProps = {
   subtitle?: string
   viewAll?: string
   icon?: ReactNode
+  onViewAll?: () => void
 }
 
-export function SectionHeader({ title, subtitle, viewAll, icon }: SectionHeaderProps) {
+export function SectionHeader({
+  title,
+  subtitle,
+  viewAll,
+  icon,
+  onViewAll,
+}: SectionHeaderProps) {
   return (
     <div className="flex items-end justify-between gap-2">
       <div className="flex flex-col gap-0.5">
@@ -25,7 +32,12 @@ export function SectionHeader({ title, subtitle, viewAll, icon }: SectionHeaderP
       </div>
 
       {viewAll ? (
-        <Button variant="ghost" size="sm">
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={onViewAll}
+          className="cursor-pointer font-medium"
+        >
           <span>{viewAll}</span>
           <ChevronRightIcon data-icon="inline-end" />
         </Button>

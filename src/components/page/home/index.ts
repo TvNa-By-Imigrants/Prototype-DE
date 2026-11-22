@@ -1,1 +1,1 @@
-export { Place } from './place'
+export { Place, Place as Home } from "./place"

@@ -1,81 +1,86 @@
-# This is the shell for the site(nav included)
-**Goal** is to make a shell and nav for the site so we have a consistance build and only need to build the page content
+# App Shell & Navigation Specification
 
-**Important** : the shell is mobile focus
+**Goal:** Create a consistent mobile-first app shell and navigation system so page content slots directly inside `<main>`.
 
-## mobile
-### Mobile Page Structure (398px)
+## Mobile Layout (`390px` Stacking)
 
 ```
 ┌─────────────────────────────────────────┐
-│ Mobile Header                           │
+│ Mobile Header (Two rows, sticky)        │
 │ ┌─────────────────────────────────────┐ │
-│ │ [Logo]     [Login] [Register][Lang] │ │
+│ │ [Logo: TvNa] [Login][Register][Lang]│ │
 │ ├─────────────────────────────────────┤ │
-│ │ [Search General...            ] [☀] │ │
+│ │ [🔍 Search general…           ] [☀] │ │
 │ └─────────────────────────────────────┘ │
 ├─────────────────────────────────────────┤
-│ Main Content (scrollable)               │
+│ Main Content (scrollable, pb-24)        │
 │                                         │
 │ ┌─────────────────────────────────────┐ │
-│ │ Hero Carousel (Swipeable)           │ │
+│ │ Hero Promotion Slider (Auto-loop)   │ │
 │ └─────────────────────────────────────┘ │
 │                                         │
 │ ┌─────────────────────────────────────┐ │
 │ │ Section: Feed          [View All >] │ │
 │ │ ┌───────────────┐ ┌───────────────┐ │ │
-│ │ │ Card 1        │ │ Card 2        │ │ │
-│ │ │ [Img+Badges]  │ │ [Img+Badges]  │ │ │
-│ │ │ Author        │ │ Author        │ │ │
-│ │ │ Title/Desc    │ │ Title/Desc    │ │ │
-│ │ │ Stats Row     │ │ Stats Row     │ │ │
+│ │ │ Feed Card 1   │ │ Feed Card 2   │ │ │
 │ │ └───────────────┘ └───────────────┘ │ │
 │ │ ┌───────────────┐ ┌───────────────┐ │ │
-│ │ │ Card 3        │ │ Card 4        │ │ │
-│ │ │ [Img+Badges]  │ │ [Img+Badges]  │ │ │
+│ │ │ Feed Card 3   │ │ Feed Card 4   │ │ │
+│ │ └───────────────┘ └───────────────┘ │ │
+│ └─────────────────────────────────────┘ │
+│                                         │
+│ ┌─────────────────────────────────────┐ │
+│ │ Section: Hang Out (Partnered)       │ │
+│ │ ┌───────────────┐ ┌───────────────┐ │ │
+│ │ │ Place Card 1  │ │ Place Card 2  │ │ │
 │ │ └───────────────┘ └───────────────┘ │ │
 │ └─────────────────────────────────────┘ │
 ├─────────────────────────────────────────┤
-│ Fixed Bottom Navigation Bar             │
-│ [Home]  [Feed]  [Plan ]  [Map ]  [Hub ] │
+│ Fixed Bottom Navigation Bar (lg:hidden) │
+│ [Home]  [Place]  [Plan]  [Map]  [Feed]  │
 └─────────────────────────────────────────┘
-
 ```
 
-### Desktop Page Structure (1280px+)
+## Desktop Layout (`1280px+`)
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
-│ Desktop Header (Sticky)                                                 │
+│ Desktop Header (Single unified row, sticky top-0, z-40)                 │
 │ ┌─────────────────────────────────────────────────────────────────────┐ │
-│ │ [Logo]  [Home] [Feed] [Plan] [Map] [Hub]                            │ │
-│ │                                 [Search General...] [☀] [Lang]      │ │
-│ │                                 [Login] [Register]                  │ │
+│ │ [Logo]  [Home] [Place] [Plan] [Map] [Feed]                          │ │
+│ │                             [🔍 Search…] [Lang: KM/EN] [☀] [Login]  │ │
 │ └─────────────────────────────────────────────────────────────────────┘ │
 ├─────────────────────────────────────────────────────────────────────────┤
-│ Centered Main Container (max-width: 1280px, scrollable)                 │
+│ Centered Main Container (max-w-7xl, px-4, pb-10)                        │
 │                                                                         │
 │   ┌─────────────────────────────────────────────────────────────────┐   │
-│   │ Hero Carousel                                                   │   │
+│   │ Hero Promotion Slider (Looped brand & partner places)           │   │
 │   └─────────────────────────────────────────────────────────────────┘   │
 │                                                                         │
 │   ┌─────────────────────────────────────────────────────────────────┐   │
-│   │ Section: Feed                               [View All >] [<][>] │   │
+│   │ Section: Feed (Top 4 picks)                 [View All >](/feed) │   │
 │   │ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ │   │
-│   │ │ Card 1      │ │ Card 2      │ │ Card 3      │ │ Card 4      │ │   │
-│   │ │ [Img+Badges]│ │ [Img+Badges]│ │ [Img+Badges]│ │ [Img+Badges]│ │   │
-│   │ │ Author      │ │ Author      │ │ Author      │ │ Author      │ │   │
-│   │ │ Title/Desc  │ │ Title/Desc  │ │ Title/Desc  │ │ Title/Desc  │ │   │
-│   │ │ Stats Row   │ │ Stats Row   │ │ Stats Row   │ │ Stats Row   │ │   │
+│   │ │ Feed Card 1 │ │ Feed Card 2 │ │ Feed Card 3 │ │ Feed Card 4 │ │   │
 │   │ └─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘ │   │
 │   └─────────────────────────────────────────────────────────────────┘   │
 │                                                                         │
+│   ┌─────────────────────────────────────────────────────────────────┐   │
+│   │ Section: Hangout Places (Partnered)        [View All >](/place) │   │
+│   │ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ │   │
+│   │ │ Place Card 1│ │ Place Card 2│ │ Place Card 3│ │ Place Card 4│ │   │
+│   │ └─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘ │   │
+│   └─────────────────────────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────────────────────┘
-
 ```
 
 ### Key Responsive Shell Rules
 
-* **Navigation Shift:** The fixed bottom bar (`[Home] [Feed] [Plan] [Map] [Hub]`) promotes directly into the horizontal top header on `md:` / `lg:` screens—no extra links, keeping route parity 1:1 with mobile.
-* **Header Consolidation:** The two-row mobile header merges into a single horizontal bar containing the brand logo, the 5 primary nav links, the search input, theme/language toggles (`[☀]`, `[Lang]`), and auth actions (`[Login]`, `[Register]`).
-* **Content Grid:** The 2-column mobile feed grid expands to a 4-column grid (`grid-cols-2 lg:grid-cols-4`) inside a centered `max-w-7xl` container, dropping the ticker, upload CTA, and floating action buttons to match your stripped-back mobile shell.
+1. **Navigation Order & Route Parity:**
+   - 5 primary destinations: **Home** (`/`), **Place** (`/place`), **Plan** (`/plan`), **Map** (`/map`), **Feed** (`/feed`).
+   - Fixed bottom bar on mobile (`lg:hidden`).
+   - Promoted directly to the top horizontal header on desktop (`hidden lg:flex`).
+2. **Header Consolidation:**
+   - Mobile: 2 rows (top: Logo + Auth + Lang; bottom: Search input + Theme switch).
+   - Desktop: Single consolidated row with brand logo, nav links, search input, theme toggle, language dropdown (`KM` / `EN`), and login/register actions.
+3. **Safe Area & Viewport:**
+   - Safe-area insets handled on all edges: `pl-[max(1rem,env(safe-area-inset-left))]` and `pb-24` on mobile to clear the fixed bottom nav.
