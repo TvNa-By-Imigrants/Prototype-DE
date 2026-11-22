@@ -1,1 +1,2 @@
-export * from './place-discovery'
+export * from "./home"
+export * from "./place"

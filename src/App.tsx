@@ -1,29 +1,47 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
-import { Place } from '@/components/page'
+import { useState } from "react"
+
+import { FeedCard } from "@/components/cards"
+import { Home, PlacePage } from "@/components/page"
+import { AppShell } from "@/components/shell"
+import { feedPosts } from "@/data"
+import { useLanguage } from "@/i18n"
+
+function FeedView() {
+  const { t } = useLanguage()
+
+  return (
+    <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-1.5">
+        <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+          {t("discovery.feedTitle")}
+        </h1>
+        <p className="text-sm text-muted-foreground sm:text-base">
+          {t("discovery.feedSubtitle")}
+        </p>
+      </div>
+
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+        {feedPosts.map((post) => (
+          <FeedCard key={post.id} post={post} />
+        ))}
+      </div>
+    </div>
+  )
+}
 
 function App() {
+  const [active, setActive] = useState("/")
+
   return (
-    <main className="flex min-h-screen items-center justify-center p-8">
-      <Card className="w-full max-w-sm">
-        <CardHeader>
-          <CardTitle>Tovna24</CardTitle>
-          <CardDescription>ទៅណា២៤ — where to go in Phnom Penh</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p className="text-sm text-muted-foreground">
-            shadcn/ui is wired up with the Tovna24 design tokens.
-          </p>
-        </CardContent>
-      </Card>
-      
-      <Place />
-    </main>
+    <AppShell active={active} onActiveChange={setActive}>
+      {active === "/place" ? (
+        <PlacePage />
+      ) : active === "/feed" ? (
+        <FeedView />
+      ) : (
+        <Home onNavigate={setActive} />
+      )}
+    </AppShell>
   )
 }
 
