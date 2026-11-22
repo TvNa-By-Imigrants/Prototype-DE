@@ -84,3 +84,10 @@
    - Desktop: Single consolidated row with brand logo, nav links, search input, theme toggle, language dropdown (`KM` / `EN`), and login/register actions.
 3. **Safe Area & Viewport:**
    - Safe-area insets handled on all edges: `pl-[max(1rem,env(safe-area-inset-left))]` and `pb-24` on mobile to clear the fixed bottom nav.
+4. **Destination State & Unbuilt Pages Placeholder:**
+   - Implemented destinations:
+     - `/` (Home): Looped partner & brand hero slider, 4 community feed preview posts, and 4 partner-only hangout cards with "View All" routing.
+     - `/place` (Place): Category filtering (All, Visit, Eat, Cafe, Stay), live search, and infinite scroll pagination with Base UI skeleton loaders.
+   - Unbuilt / Under-construction destinations:
+     - `/feed` (Feed), `/plan` (Plan), and `/map` (Map) (or any route not yet fully designed) route directly to `NotBuiltPage` (`src/components/page/not-built/not-built-page.tsx`).
+     - Features: Contextual Lucide icon (`RssIcon` for feed, `CalendarDaysIcon` for plan, `MapIcon` for map), "Under Construction" badge (`កំពុងរៀបចំ` / `Under Construction`), localized title and description, and two CTA buttons: "Back to Home" (`/`) and "Explore Places" (`/place`).

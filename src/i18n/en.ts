@@ -44,6 +44,13 @@ export const en = {
     noResults: "No places match your search",
     resetFilters: "Reset filters",
   },
+  notBuilt: {
+    badge: "Under Construction",
+    title: "Haven't been built yet",
+    description: "This page hasn't been built yet. We are actively working on it! You can explore our places or return to the home page.",
+    backHome: "Back to Home",
+    explorePlaces: "Explore Places",
+  },
   discovery: {
     heroHeadline: "Where to go?",
     heroTagline: "Discover places to visit, eat and stay in Phnom Penh",
