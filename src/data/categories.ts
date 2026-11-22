@@ -30,3 +30,22 @@ export const placeCategories: CategoryItem[] = [
   { id: "cafe", labelKey: "category.cafe", icon: CoffeeIcon },
   { id: "stay", labelKey: "category.stay", icon: BedDoubleIcon },
 ]
+
+export type AreaItem = {
+  id: string
+  name: string
+  nameKm: string
+  province: string
+}
+
+export const popularAreas: AreaItem[] = [
+  { id: "bkk1", name: "BKK1", nameKm: "បឹងកេងកង១", province: "Phnom Penh" },
+  { id: "doun-penh", name: "Doun Penh", nameKm: "ដូនពេញ", province: "Phnom Penh" },
+  { id: "tuol-tompoung", name: "Tuol Tompoung", nameKm: "ទួលទំពូង", province: "Phnom Penh" },
+  { id: "toul-kork", name: "Toul Kork", nameKm: "ទួលគោក", province: "Phnom Penh" },
+  { id: "chamkar-mon", name: "Chamkar Mon", nameKm: "ចំការមន", province: "Phnom Penh" },
+  { id: "chroy-changvar", name: "Chroy Changvar", nameKm: "ជ្រោយចង្វារ", province: "Phnom Penh" },
+  { id: "siem-reap-angkor", name: "Angkor Area", nameKm: "តំបន់អង្គរ", province: "Siem Reap" },
+  { id: "kampot-river", name: "Kampot River", nameKm: "មាត់ព្រែកកំពត", province: "Kampot" },
+  { id: "kep-crab", name: "Kep Waterfront", nameKm: "មាត់សមុទ្រកែប", province: "Kep" },
+]

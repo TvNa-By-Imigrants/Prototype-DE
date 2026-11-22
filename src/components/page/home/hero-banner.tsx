@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react"
 import { ChevronLeftIcon, ChevronRightIcon, SparklesIcon } from "lucide-react"
 
-import heroImg from "@/assets/hero.png"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { LogoMark } from "@/components/shell/logo"
 import { useLanguage } from "@/i18n"
 import { cn } from "cn"
 
@@ -31,28 +29,35 @@ const slides: SlideItem[] = [
     isBrandSlide: true,
     headlineKey: "discovery.heroHeadline",
     taglineKey: "discovery.heroTagline",
-    image: heroImg,
-  },
-  {
-    id: "rosewood-phnom-penh",
-    headlineText: "Rosewood Phnom Penh",
-    taglineText: "សណ្ឋាគារប្រណិត និងទេសភាពរាជធានីភ្នំពេញពីលើអាកាស",
-    meta: "Doun Penh · Luxury Hotel",
-    image: heroImg,
-  },
-  {
-    id: "malis-restaurant",
-    headlineText: "Malis Living Cambodian Cuisine",
-    taglineText: "ម្ហូបខ្មែរបុរាណ និងទំនើបដ៏ឈ្ងុយឆ្ងាញ់ក្នុងរាជធានី",
-    meta: "BKK1 · Fine Dining",
-    image: heroImg,
+    image: "/assets/visitPhnomPenh.webp",
   },
   {
     id: "tsutaya-cafe",
     headlineText: "Tatsuya Bookstore Cafe",
-    taglineText: "ហាងកាហ្វេ និងសៀវភៅ សម្រាប់ជួបជុំ និងលំហែកាយ",
-    meta: "BKK1 · Cafe & Books",
-    image: heroImg,
+    taglineText: "ហាងសៀវភៅ និងកាហ្វេ សម្រាប់អាន និងធ្វើការយ៉ាងស្ងប់ស្ងាត់",
+    meta: "BKK1 · Bookstore Cafe",
+    image: "/assets/tsutayabookstore.webp",
+  },
+  {
+    id: "kaixin-hotpot",
+    headlineText: "Kaixin Hotpot",
+    taglineText: "ស៊ុបក្ដៅរសជាតិដើមដ៏ឈ្ងុយឆ្ងាញ់នៅ Fun Mall",
+    meta: "Toul Kork · Restaurant",
+    image: "/assets/kaixin.webp",
+  },
+  {
+    id: "coconut-park",
+    headlineText: "Coconut Park Cafe",
+    taglineText: "សួនកម្សាន្តធម្មជាតិ និងកាហ្វេមាត់ទឹកដ៏ត្រជាក់",
+    meta: "Chamkar Mon · Park & Cafe",
+    image: "/assets/coconutpark.webp",
+  },
+  {
+    id: "funnifun-arcade",
+    headlineText: "Funnifun Arcade",
+    taglineText: "កន្លែងកម្សាន្តចាប់តុក្កតា និងហ្គេមប្លែកៗ",
+    meta: "BKK1 · Arcade & Games",
+    image: "/assets/funnifun.webp",
   },
 ]
 
@@ -128,7 +133,11 @@ export function HeroBanner({ onNavigate, className }: HeroBannerProps) {
               <div className="relative z-10 flex max-w-xl flex-col items-start gap-2.5 text-white">
                 {slide.isBrandSlide ? (
                   <div className="flex items-center gap-2">
-                    <LogoMark className="size-8 rounded-md bg-primary text-primary-foreground shadow-xs" />
+                    <img
+                      src="/assets/TvNa.png"
+                      alt="TvNa"
+                      className="size-8 rounded-md object-contain bg-primary p-0.5 shadow-xs"
+                    />
                     <Badge
                       variant="outline"
                       className="border-white/30 bg-white/15 text-white backdrop-blur-xs font-semibold"

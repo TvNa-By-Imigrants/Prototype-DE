@@ -38,12 +38,20 @@ export function FeedCard({ post, className }: { post: FeedPost; className?: stri
 
       <CardHeader>
         <div className="flex items-center gap-2">
-          <span
-            aria-hidden="true"
-            className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground"
-          >
-            {post.author.name.charAt(0)}
-          </span>
+          {post.author.avatar ? (
+            <img
+              src={post.author.avatar}
+              alt={post.author.name}
+              className="size-7 shrink-0 rounded-full object-cover ring-1 ring-border"
+            />
+          ) : (
+            <span
+              aria-hidden="true"
+              className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground"
+            >
+              {post.author.name.charAt(0)}
+            </span>
+          )}
           <span className="text-sm font-medium text-foreground">
             {post.author.name}
           </span>
