@@ -17,19 +17,36 @@ import { cn } from "cn"
 export type PlaceCardProps = {
   place: PlaceItem
   className?: string
+  onClick?: (place: PlaceItem) => void
+  onAddToPlan?: (place: PlaceItem) => void
+  onGoNow?: (place: PlaceItem) => void
 }
 
 /**
  * Compact place card built from shadcn `Card` (size "sm") + `AspectRatio`
  * (16:9) + `Badge`, with `Go Now` / `Add to Plan` actions. See `design/card.md`.
  */
-export function PlaceCard({ place, className }: PlaceCardProps) {
+export function PlaceCard({
+  place,
+  className,
+  onClick,
+  onAddToPlan,
+  onGoNow,
+}: PlaceCardProps) {
   const { language, t } = useLanguage()
   const show24Hours =
     place.is24Hours === true || place.hours?.toLowerCase() === "24 hours"
 
   return (
-    <Card size="sm" className={cn("h-full pt-0", className)}>
+    <Card
+      size="sm"
+      className={cn(
+        "h-full pt-0 transition-all duration-200",
+        onClick && "cursor-pointer hover:shadow-md hover:border-primary/40",
+        className
+      )}
+      onClick={() => onClick?.(place)}
+    >
       <AspectRatio ratio={16 / 9} className="overflow-hidden bg-muted">
         <img
           src={place.image}
@@ -88,18 +105,34 @@ export function PlaceCard({ place, className }: PlaceCardProps) {
         <Button
           variant="outline"
           size="sm"
-          className="flex-1"
+          className="flex-1 cursor-pointer"
           aria-label={t("card.goNow")}
           title={t("card.goNow")}
+          onClick={(e) => {
+            e.stopPropagation()
+            if (onGoNow) {
+              onGoNow(place)
+            } else {
+              onClick?.(place)
+            }
+          }}
         >
           <NavigationIcon />
           <span className="hidden sm:inline">{t("card.goNow")}</span>
         </Button>
         <Button
           size="sm"
-          className="flex-1"
+          className="flex-1 cursor-pointer"
           aria-label={t("card.addToPlan")}
           title={t("card.addToPlan")}
+          onClick={(e) => {
+            e.stopPropagation()
+            if (onAddToPlan) {
+              onAddToPlan(place)
+            } else {
+              onClick?.(place)
+            }
+          }}
         >
           <CalendarPlusIcon />
           <span className="hidden sm:inline">{t("card.addToPlan")}</span>

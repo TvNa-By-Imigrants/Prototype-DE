@@ -1,7 +1,9 @@
+import { useState } from "react"
 import { FlameIcon, SparklesIcon } from "lucide-react"
 
 import { FeedCard, PlaceCard } from "@/components/cards"
-import { feedPosts, partneredPlaces } from "@/data"
+import { PlaceDetailDialog } from "@/components/page/place-detail"
+import { feedPosts, partneredPlaces, type PlaceItem } from "@/data"
 import { useLanguage } from "@/i18n"
 
 import { HeroBanner } from "./hero-banner"
@@ -9,6 +11,9 @@ import { SectionHeader } from "./section-header"
 
 export type HomeProps = {
   onNavigate?: (href: string) => void
+  onSelectPlace?: (place: PlaceItem) => void
+  onAddToPlan?: (place: PlaceItem) => void
+  onGoNow?: (place: PlaceItem) => void
 }
 
 /**
@@ -17,14 +22,28 @@ export type HomeProps = {
  * - Feed section: Exactly 4 fresh picks, "View All" navigates to /feed.
  * - Places section: Partnered places only for promotion, "View All" navigates to /place.
  */
-export function Place({ onNavigate }: HomeProps) {
+export function Place({
+  onNavigate,
+  onSelectPlace,
+  onAddToPlan,
+  onGoNow,
+}: HomeProps) {
   const { t } = useLanguage()
+  const [dialogPlace, setDialogPlace] = useState<PlaceItem | null>(null)
 
   // Only show the first 4 feed posts on Home
   const homeFeedPosts = feedPosts.slice(0, 4)
 
   // Only show partnered places on Home (max 4)
   const homePartneredPlaces = partneredPlaces.slice(0, 4)
+
+  const handleCardClick = (place: PlaceItem) => {
+    if (onSelectPlace) {
+      onSelectPlace(place)
+    } else {
+      setDialogPlace(place)
+    }
+  }
 
   return (
     <div className="flex flex-col gap-8 lg:gap-10">
@@ -58,10 +77,43 @@ export function Place({ onNavigate }: HomeProps) {
         />
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
           {homePartneredPlaces.map((place) => (
-            <PlaceCard key={place.id} place={place} />
+            <PlaceCard
+              key={place.id}
+              place={place}
+              onClick={handleCardClick}
+              onGoNow={(p) => {
+                if (onGoNow) {
+                  onGoNow(p)
+                } else {
+                  onNavigate?.("/map")
+                }
+              }}
+              onAddToPlan={(p) => {
+                if (onAddToPlan) {
+                  onAddToPlan(p)
+                } else {
+                  onNavigate?.("/plan")
+                }
+              }}
+            />
           ))}
         </div>
       </section>
+
+      {/* Place Detail Dialog / Sheet fallback */}
+      <PlaceDetailDialog
+        place={dialogPlace}
+        open={!!dialogPlace}
+        onOpenChange={(open) => !open && setDialogPlace(null)}
+        onViewOnMap={() => {
+          setDialogPlace(null)
+          onNavigate?.("/map")
+        }}
+        onAddToPlan={() => {
+          setDialogPlace(null)
+          onNavigate?.("/plan")
+        }}
+      />
     </div>
   )
 }
