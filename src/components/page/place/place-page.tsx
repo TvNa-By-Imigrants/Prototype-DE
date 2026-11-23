@@ -7,6 +7,7 @@ import {
 } from "lucide-react"
 
 import { PlaceCard } from "@/components/cards"
+import { PlaceDetailDialog } from "@/components/page/place-detail"
 import { Button } from "@/components/ui/button"
 import {
   InputGroup,
@@ -48,13 +49,26 @@ function PlaceCardSkeleton() {
   )
 }
 
-export function PlacePage() {
+export type PlacePageProps = {
+  onSelectPlace?: (place: PlaceItem) => void
+}
+
+export function PlacePage({ onSelectPlace }: PlacePageProps = {}) {
   const { language, t } = useLanguage()
   const [selectedCategory, setSelectedCategory] = useState<string>("all")
   const [searchQuery, setSearchQuery] = useState("")
   const [visibleCount, setVisibleCount] = useState(INITIAL_BATCH_SIZE)
   const [isLoadingMore, setIsLoadingMore] = useState(false)
+  const [dialogPlace, setDialogPlace] = useState<PlaceItem | null>(null)
   const sentinelRef = useRef<HTMLDivElement | null>(null)
+
+  const handleCardClick = (place: PlaceItem) => {
+    if (onSelectPlace) {
+      onSelectPlace(place)
+    } else {
+      setDialogPlace(place)
+    }
+  }
 
   // Filter places based on selected category and search query
   const filteredPlaces = useMemo(() => {
@@ -241,7 +255,11 @@ export function PlacePage() {
         <section aria-label={t("placePage.title")} className="flex flex-col gap-6">
           <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
             {visiblePlaces.map((place) => (
-              <PlaceCard key={place.id} place={place} />
+              <PlaceCard
+                key={place.id}
+                place={place}
+                onClick={handleCardClick}
+              />
             ))}
             {isLoadingMore && (
               <>
@@ -272,6 +290,13 @@ export function PlacePage() {
           </div>
         </section>
       )}
+
+      {/* Place Detail Dialog / Sheet */}
+      <PlaceDetailDialog
+        place={dialogPlace}
+        open={!!dialogPlace}
+        onOpenChange={(open) => !open && setDialogPlace(null)}
+      />
     </div>
   )
 }

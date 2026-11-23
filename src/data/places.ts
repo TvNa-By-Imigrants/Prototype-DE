@@ -10,6 +10,8 @@ export type PlaceItem = {
   categoryId: PlaceCategoryId
   /** Local Google Maps photo path (e.g. /assets/tsutayabookstore.webp) */
   image: string
+  /** Multiple photos for gallery view. */
+  gallery?: string[]
   /** Star rating out of 5.0 (e.g. 4.8). */
   rating?: number
   /** Total user reviews count on Google Maps. */
@@ -46,6 +48,14 @@ export const places: PlaceItem[] = [
     category: "Bookstore Cafe",
     categoryId: "cafe",
     image: "/assets/tsutayabookstore.webp",
+    gallery: [
+      "/assets/tsutayabookstore.webp",
+      "/assets/coconutpark.webp",
+      "/assets/noreaRiverSide.webp",
+      "/assets/playroom.webp",
+      "/assets/funmall.webp",
+      "/assets/museum.webp",
+    ],
     rating: 4.8,
     reviewsCount: 342,
     priceLevel: "$$",
@@ -66,6 +76,13 @@ export const places: PlaceItem[] = [
     category: "Restaurant",
     categoryId: "eat",
     image: "/assets/kaixin.webp",
+    gallery: [
+      "/assets/kaixin.webp",
+      "/assets/funmall.webp",
+      "/assets/sajkoang.webp",
+      "/assets/miMtes.webp",
+      "/assets/miteanh.webp",
+    ],
     rating: 4.7,
     reviewsCount: 520,
     priceLevel: "$$",
@@ -86,6 +103,13 @@ export const places: PlaceItem[] = [
     category: "Park & Cafe",
     categoryId: "visit",
     image: "/assets/coconutpark.webp",
+    gallery: [
+      "/assets/coconutpark.webp",
+      "/assets/noreaRiverSide.webp",
+      "/assets/funnifun.webp",
+      "/assets/visitPhnomPenh.webp",
+      "/assets/playroom.webp",
+    ],
     rating: 4.8,
     reviewsCount: 460,
     priceLevel: "$",
@@ -106,6 +130,12 @@ export const places: PlaceItem[] = [
     category: "Arcade & Games",
     categoryId: "visit",
     image: "/assets/funnifun.webp",
+    gallery: [
+      "/assets/funnifun.webp",
+      "/assets/playroom.webp",
+      "/assets/funmall.webp",
+      "/assets/tsutayabookstore.webp",
+    ],
     rating: 4.6,
     reviewsCount: 290,
     priceLevel: "$$",
@@ -130,6 +160,13 @@ export const places: PlaceItem[] = [
     category: "Park & Promenade",
     categoryId: "visit",
     image: "/assets/noreaRiverSide.webp",
+    gallery: [
+      "/assets/noreaRiverSide.webp",
+      "/assets/visitPhnomPenh.webp",
+      "/assets/coconutpark.webp",
+      "/assets/museum.webp",
+      "/assets/tsutayabookstore.webp",
+    ],
     rating: 4.8,
     reviewsCount: 1120,
     priceLevel: "$",
@@ -149,6 +186,12 @@ export const places: PlaceItem[] = [
     category: "Park & Promenade",
     categoryId: "visit",
     image: "/assets/visitPhnomPenh.webp",
+    gallery: [
+      "/assets/visitPhnomPenh.webp",
+      "/assets/noreaRiverSide.webp",
+      "/assets/museum.webp",
+      "/assets/coconutpark.webp",
+    ],
     rating: 4.9,
     reviewsCount: 2450,
     priceLevel: "$",
@@ -310,6 +353,14 @@ export const places: PlaceItem[] = [
     category: "Cafe",
     categoryId: "cafe",
     image: "/assets/tsutayabookstore.webp",
+    gallery: [
+      "/assets/tsutayabookstore.webp",
+      "/assets/coconutpark.webp",
+      "/assets/noreaRiverSide.webp",
+      "/assets/playroom.webp",
+      "/assets/funmall.webp",
+      "/assets/museum.webp",
+    ],
     rating: 4.8,
     reviewsCount: 1540,
     priceLevel: "$$",
