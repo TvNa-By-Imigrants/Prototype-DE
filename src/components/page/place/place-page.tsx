@@ -51,9 +51,17 @@ function PlaceCardSkeleton() {
 
 export type PlacePageProps = {
   onSelectPlace?: (place: PlaceItem) => void
+  onNavigate?: (href: string) => void
+  onAddToPlan?: (place: PlaceItem) => void
+  onGoNow?: (place: PlaceItem) => void
 }
 
-export function PlacePage({ onSelectPlace }: PlacePageProps = {}) {
+export function PlacePage({
+  onSelectPlace,
+  onNavigate,
+  onAddToPlan,
+  onGoNow,
+}: PlacePageProps = {}) {
   const { language, t } = useLanguage()
   const [selectedCategory, setSelectedCategory] = useState<string>("all")
   const [searchQuery, setSearchQuery] = useState("")
@@ -259,6 +267,20 @@ export function PlacePage({ onSelectPlace }: PlacePageProps = {}) {
                 key={place.id}
                 place={place}
                 onClick={handleCardClick}
+                onGoNow={(p) => {
+                  if (onGoNow) {
+                    onGoNow(p)
+                  } else {
+                    onNavigate?.("/map")
+                  }
+                }}
+                onAddToPlan={(p) => {
+                  if (onAddToPlan) {
+                    onAddToPlan(p)
+                  } else {
+                    onNavigate?.("/plan")
+                  }
+                }}
               />
             ))}
             {isLoadingMore && (

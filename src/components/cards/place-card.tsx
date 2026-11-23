@@ -105,12 +105,16 @@ export function PlaceCard({
         <Button
           variant="outline"
           size="sm"
-          className="flex-1"
+          className="flex-1 cursor-pointer"
           aria-label={t("card.goNow")}
           title={t("card.goNow")}
           onClick={(e) => {
             e.stopPropagation()
-            onGoNow?.(place)
+            if (onGoNow) {
+              onGoNow(place)
+            } else {
+              onClick?.(place)
+            }
           }}
         >
           <NavigationIcon />
@@ -118,12 +122,16 @@ export function PlaceCard({
         </Button>
         <Button
           size="sm"
-          className="flex-1"
+          className="flex-1 cursor-pointer"
           aria-label={t("card.addToPlan")}
           title={t("card.addToPlan")}
           onClick={(e) => {
             e.stopPropagation()
-            onAddToPlan?.(place)
+            if (onAddToPlan) {
+              onAddToPlan(place)
+            } else {
+              onClick?.(place)
+            }
           }}
         >
           <CalendarPlusIcon />

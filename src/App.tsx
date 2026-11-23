@@ -33,9 +33,19 @@ function App() {
           }}
         />
       ) : active === "/" ? (
-        <Home onNavigate={setActive} onSelectPlace={setSelectedPlace} />
+        <Home
+          onNavigate={setActive}
+          onSelectPlace={setSelectedPlace}
+          onGoNow={() => setActive("/map")}
+          onAddToPlan={() => setActive("/plan")}
+        />
       ) : active === "/place" ? (
-        <PlacePage onSelectPlace={setSelectedPlace} />
+        <PlacePage
+          onSelectPlace={setSelectedPlace}
+          onNavigate={setActive}
+          onGoNow={() => setActive("/map")}
+          onAddToPlan={() => setActive("/plan")}
+        />
       ) : (
         <NotBuiltPage pageHref={active} onNavigate={setActive} />
       )}

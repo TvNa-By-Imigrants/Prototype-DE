@@ -12,6 +12,8 @@ import { SectionHeader } from "./section-header"
 export type HomeProps = {
   onNavigate?: (href: string) => void
   onSelectPlace?: (place: PlaceItem) => void
+  onAddToPlan?: (place: PlaceItem) => void
+  onGoNow?: (place: PlaceItem) => void
 }
 
 /**
@@ -20,7 +22,12 @@ export type HomeProps = {
  * - Feed section: Exactly 4 fresh picks, "View All" navigates to /feed.
  * - Places section: Partnered places only for promotion, "View All" navigates to /place.
  */
-export function Place({ onNavigate, onSelectPlace }: HomeProps) {
+export function Place({
+  onNavigate,
+  onSelectPlace,
+  onAddToPlan,
+  onGoNow,
+}: HomeProps) {
   const { t } = useLanguage()
   const [dialogPlace, setDialogPlace] = useState<PlaceItem | null>(null)
 
@@ -74,6 +81,20 @@ export function Place({ onNavigate, onSelectPlace }: HomeProps) {
               key={place.id}
               place={place}
               onClick={handleCardClick}
+              onGoNow={(p) => {
+                if (onGoNow) {
+                  onGoNow(p)
+                } else {
+                  onNavigate?.("/map")
+                }
+              }}
+              onAddToPlan={(p) => {
+                if (onAddToPlan) {
+                  onAddToPlan(p)
+                } else {
+                  onNavigate?.("/plan")
+                }
+              }}
             />
           ))}
         </div>
