@@ -1,5 +1,6 @@
 import {
   GlobeIcon,
+  LogOutIcon,
   MoonIcon,
   SearchIcon,
   SunIcon,
@@ -134,24 +135,61 @@ function ThemeToggle() {
   )
 }
 
-function AuthButtons({ size = "lg" }: { size?: "sm" | "lg" }) {
+function AuthButtons({
+  size = "lg",
+  signedIn,
+  onAuthAction,
+  onSignOut,
+}: {
+  size?: "sm" | "lg"
+  signedIn?: boolean
+  onAuthAction?: (mode: "login" | "register") => void
+  onSignOut?: () => void
+}) {
   const { t } = useLanguage()
+
+  if (signedIn) {
+    return (
+      <Button variant="ghost" size={size} onClick={onSignOut}>
+        <LogOutIcon data-icon="inline-start" />
+        <span>{t("auth.signOut")}</span>
+      </Button>
+    )
+  }
 
   return (
     <>
-      <Button variant="ghost" size={size}>
+      <Button
+        variant="ghost"
+        size={size}
+        onClick={() => onAuthAction?.("login")}
+      >
         {t("header.login")}
       </Button>
-      <Button size={size}>{t("header.register")}</Button>
+      <Button size={size} onClick={() => onAuthAction?.("register")}>
+        {t("header.register")}
+      </Button>
     </>
   )
+}
+
+export type HeaderProps = NavProps & {
+  signedIn?: boolean
+  onAuthAction?: (mode: "login" | "register") => void
+  onSignOut?: () => void
 }
 
 /**
  * Sticky app chrome. Mobile: two rows (brand + auth/lang, then search + theme).
  * Desktop (`lg`): a single row with the primary nav promoted into the header.
  */
-export function Header({ active, onActiveChange }: NavProps) {
+export function Header({
+  active,
+  onActiveChange,
+  signedIn,
+  onAuthAction,
+  onSignOut,
+}: HeaderProps) {
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-card">
       {/* Desktop */}
@@ -164,7 +202,11 @@ export function Header({ active, onActiveChange }: NavProps) {
           <SearchBar className="w-64" />
           <ThemeToggle />
           <LanguageSwitcher />
-          <AuthButtons />
+          <AuthButtons
+            signedIn={signedIn}
+            onAuthAction={onAuthAction}
+            onSignOut={onSignOut}
+          />
         </div>
       </div>
 
@@ -173,7 +215,12 @@ export function Header({ active, onActiveChange }: NavProps) {
         <div className="flex items-center justify-between gap-2">
           <Logo />
           <div className="flex items-center gap-1">
-            <AuthButtons size="sm" />
+            <AuthButtons
+              size="sm"
+              signedIn={signedIn}
+              onAuthAction={onAuthAction}
+              onSignOut={onSignOut}
+            />
             <LanguageSwitcher />
           </div>
         </div>
