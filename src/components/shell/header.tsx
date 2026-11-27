@@ -3,19 +3,24 @@ import {
   LogOutIcon,
   MoonIcon,
   SearchIcon,
+  SettingsIcon,
   SunIcon,
+  UserIcon,
   XIcon,
 } from "lucide-react"
-import { useState } from "react"
+import { useState, type Ref } from "react"
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
+  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import {
@@ -138,15 +143,71 @@ function ThemeToggle() {
 function AuthButtons({
   size = "lg",
   signedIn,
+  user,
   onAuthAction,
   onSignOut,
+  onOpenProfile,
+  onOpenSettings,
 }: {
   size?: "sm" | "lg"
   signedIn?: boolean
+  user?: { name: string; handle: string; avatar?: string }
   onAuthAction?: (mode: "login" | "register") => void
   onSignOut?: () => void
+  onOpenProfile?: () => void
+  onOpenSettings?: () => void
 }) {
   const { t } = useLanguage()
+
+  if (signedIn && user) {
+    return (
+      <DropdownMenu>
+        <DropdownMenuTrigger
+          render={
+            <Button
+              variant="ghost"
+              aria-label={user.name}
+              className={size === "sm" ? "size-8 rounded-full p-0" : "rounded-full pl-1"}
+            />
+          }
+        >
+          <Avatar className="size-7">
+            {user.avatar ? <AvatarImage src={user.avatar} alt="" /> : null}
+            <AvatarFallback className="bg-secondary text-xs font-semibold text-secondary-foreground">
+              {user.name.charAt(0)}
+            </AvatarFallback>
+          </Avatar>
+          {size === "lg" ? (
+            <span className="max-w-28 truncate text-sm">{user.name}</span>
+          ) : null}
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="min-w-48">
+          <DropdownMenuGroup>
+            <DropdownMenuLabel className="flex flex-col gap-0.5">
+              <span className="truncate text-sm font-semibold text-foreground">
+                {user.name}
+              </span>
+              <span className="truncate font-normal">@{user.handle}</span>
+            </DropdownMenuLabel>
+          </DropdownMenuGroup>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={onOpenProfile}>
+            <UserIcon />
+            {t("profile.myProfile")}
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={onOpenSettings}>
+            <SettingsIcon />
+            {t("settings.title")}
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem variant="destructive" onClick={onSignOut}>
+            <LogOutIcon />
+            {t("auth.signOut")}
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    )
+  }
 
   if (signedIn) {
     return (
@@ -174,9 +235,14 @@ function AuthButtons({
 }
 
 export type HeaderProps = NavProps & {
+  /** Measured by `AppShell` to publish `--header-h` for sticky sub-bars. */
+  ref?: Ref<HTMLElement>
   signedIn?: boolean
+  user?: { name: string; handle: string; avatar?: string }
   onAuthAction?: (mode: "login" | "register") => void
   onSignOut?: () => void
+  onOpenProfile?: () => void
+  onOpenSettings?: () => void
 }
 
 /**
@@ -184,14 +250,18 @@ export type HeaderProps = NavProps & {
  * Desktop (`lg`): a single row with the primary nav promoted into the header.
  */
 export function Header({
+  ref,
   active,
   onActiveChange,
   signedIn,
+  user,
   onAuthAction,
   onSignOut,
+  onOpenProfile,
+  onOpenSettings,
 }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-card">
+    <header ref={ref} className="sticky top-0 z-40 border-b border-border bg-card">
       {/* Desktop */}
       <div className="mx-auto hidden h-16 w-full max-w-7xl items-center justify-between gap-6 pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] lg:flex">
         <div className="flex items-center gap-8">
@@ -204,8 +274,11 @@ export function Header({
           <LanguageSwitcher />
           <AuthButtons
             signedIn={signedIn}
+            user={user}
             onAuthAction={onAuthAction}
             onSignOut={onSignOut}
+            onOpenProfile={onOpenProfile}
+            onOpenSettings={onOpenSettings}
           />
         </div>
       </div>
@@ -218,8 +291,11 @@ export function Header({
             <AuthButtons
               size="sm"
               signedIn={signedIn}
+              user={user}
               onAuthAction={onAuthAction}
               onSignOut={onSignOut}
+              onOpenProfile={onOpenProfile}
+              onOpenSettings={onOpenSettings}
             />
             <LanguageSwitcher />
           </div>

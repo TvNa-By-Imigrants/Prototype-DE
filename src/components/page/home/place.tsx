@@ -14,6 +14,7 @@ export type HomeProps = {
   onSelectPlace?: (place: PlaceItem) => void
   onAddToPlan?: (place: PlaceItem) => void
   onGoNow?: (place: PlaceItem) => void
+  onOpenAuthor?: (handle: string) => void
 }
 
 /**
@@ -27,6 +28,7 @@ export function Place({
   onSelectPlace,
   onAddToPlan,
   onGoNow,
+  onOpenAuthor,
 }: HomeProps) {
   const { t } = useLanguage()
   const [dialogPlace, setDialogPlace] = useState<PlaceItem | null>(null)
@@ -61,7 +63,11 @@ export function Place({
         />
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
           {homeFeedPosts.map((post) => (
-            <FeedCard key={post.id} post={post} />
+            <FeedCard
+              key={post.id}
+              post={post}
+              onOpenAuthor={onOpenAuthor}
+            />
           ))}
         </div>
       </section>
